@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+     stage('Source') {
+            steps {
+         // Get some code from our Git repository
+         git 'https://github.com/satyadas2000/pipelinetest'
+            }
+      }
+        stage('Build') {
+            steps {
+                mvn 'clean install -DskipTests'
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                mvn 'test'
+
+            }
+        }
+
+        
+    }
+}

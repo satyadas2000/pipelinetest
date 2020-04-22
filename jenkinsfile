@@ -1,26 +1,21 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven'
+    }
+
     stages {
-     stage('Source') {
+        stage('Checkout') {
             steps {
-         // Get some code from our Git repository
-         git 'https://github.com/satyadas2000/pipelinetest'
+                git 'https://github.com/satyadas20000/pipelinetest'
             }
-      }
+        }
+
         stage('Build') {
             steps {
-                mvn 'clean install -DskipTests'
+                sh 'mvn -B package'
             }
         }
-
-        stage('Unit Test') {
-            steps {
-                mvn 'test'
-
-            }
-        }
-
-        
     }
 }

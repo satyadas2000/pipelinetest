@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
+import brave.Span;
+import brave.Tracer;
+import brave.Tracer.SpanInScope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
  
@@ -28,15 +29,19 @@ public class CustomerController
 	@RequestMapping("/customers")
     public List<Customer> findAll()
     {
+		List<Customer> customerList;
     	LOGGER.info("CustomerController#findAll");
-    	Span getBarSpan = tracer.createSpan("findall-span");
+    	brave.Span span = tracer.nextSpan().name("findallspan");
+    	try (SpanInScope ws = tracer.withSpanInScope(span.start())) {
 		LOGGER.info("Calling to get message");
-		String addrmsg = restTemplate.getForObject("http://localhost:8081/test-doc1/address", String.class);
-      List<Customer> customerList = new ArrayList<Customer>();
+		String addrmsg = restTemplate.getForObject("http://test-doc-test-doc.127.0.0.1.nip.io/test-doc1/address", String.class);
+      customerList = new ArrayList<Customer>();
       customerList.add(new Customer(1, "frank",addrmsg));
       customerList.add(new Customer(2, "john",addrmsg));
       LOGGER.info("Done to get message");
-      tracer.close(getBarSpan);
+    	} finally {
+    		  span.finish();
+    		}
       return customerList;
     }
 }

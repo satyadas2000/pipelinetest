@@ -24,8 +24,7 @@ public class CustomerController
 	@Autowired
 	private RestTemplate restTemplate;
 
-	
-	
+		
 	@RequestMapping("/customers")
     public List<Customer> findAll()
     {

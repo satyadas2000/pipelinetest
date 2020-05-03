@@ -1,2 +1,9 @@
 mvn compile
     mvn exec:java -Dexec.mainClass="com.test_doc.App"  
+    
+    
+    start zipkin
+    https://computingforgeeks.com/install-zipkin-distributed-tracing-system-on-ubuntu-debian-centos/
+    cd /home/satya/zipkin
+    java -jar zipkin.jar
+    http://localhost:9411/zipkin/

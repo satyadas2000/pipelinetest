@@ -35,7 +35,7 @@ public class CustomerController
     	try (SpanInScope ws = tracer.withSpanInScope(span.start())) {
 		LOGGER.info("Calling to get message");
 		String addrmsg = restTemplate.getForObject("http://pipelinetest-tracingproj.127.0.0.1.nip.io/test-doc1/address", String.class);
-      customerList = new ArrayList<Customer>();
+      customerList = new ArrayList<Customer>(); 
       customerList.add(new Customer(1, "frank",addrmsg));
       customerList.add(new Customer(2, "john",addrmsg));
       LOGGER.info("Done to get message");

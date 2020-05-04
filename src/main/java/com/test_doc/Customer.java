@@ -1,13 +1,19 @@
 package com.test_doc;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable{
 
 	private int id;
 	private String name;
 	private String addr;
 
+    public Customer()
+    {
+     super();
+    }
 	public Customer(int id, String name, String addr) {
-		super();
+		
 		this.id = id;
 		this.name = name;
 		this.addr=addr;

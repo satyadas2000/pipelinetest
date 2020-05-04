@@ -7,3 +7,7 @@ mvn compile
     cd /home/satya/zipkin
     java -jar zipkin.jar
     http://localhost:9411/zipkin/
+    
+    
+    kafka listener
+    IdeliveryMessaging.java

@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @SpringBootApplication
 public class App {
 
@@ -20,5 +22,10 @@ public class App {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+	
+    @Bean
+    public ObjectMapper mapper(){
+        return new ObjectMapper();
+    }
 
 }
